@@ -30,11 +30,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
-				<p style="font-size: 25px;color: rgb(127,127,127);"> Released : <?php  //Something is missing ...  ?> </p>
-				<p style="font-size: 25px;color: rgb(127,127,127);"> Director : <?php  //Something is missing ... ?> </p>
+				<p style="font-size: 25px;color: rgb(127,127,127);"> Released : <?php echo $row['Year']; ?> </p>
+				<p style="font-size: 25px;color: rgb(127,127,127);"> Director : <?php echo $row['Director']; ?> </p>
 			</div>
 			<div class="col-md-6">
-				<img src="<?php  //Something is missing ...?>" alt="Link Poster not found !" width="300" height="400">
+				<img src="<?php  echo $row['PosterLink']; ?>" alt="Link Poster not found !" width="300" height="400">
 			</div>
 		</div>
 	</div>
