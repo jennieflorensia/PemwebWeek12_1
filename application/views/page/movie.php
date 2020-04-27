@@ -10,7 +10,7 @@
 	<br/>
 	<br/>
 	<br/>
-	<a href="..." style="float:right;margin-right: 15px;">
+	<a href="<?= site_url('MoviePage/AddMovie')?>" style="float:right;margin-right: 15px;">
 		<button class="btn btn-primary"> 
 			<span class="glyphicon glyphicon-plus"></span>
 			Movie
