@@ -45,21 +45,43 @@ class MoviePage extends CI_Controller {
 		$data['navbar'] = $this->load->view('template/navbar_movie',NULL,TRUE);
 		$data['footer'] = $this->load->view('template/footer_movie',NULL,TRUE);
 
-		$post = $this->input->post();
-		$this->Title = $post['title'];
-		$this->Year = $post['year'];
-		$this->Director = $post['director'];
+		// $validation = $this->form_validation;
 
-		$config['upload_path']          = './assets/poster/';
-		$config['allowed_types']        = 'jpg|png';
-		$config['max_size']             = 100;
-		$config['max_width']            = 1024;
-		$config['max_height']           = 768;
- 
-		$this->load->library('upload', $config);
+        // $validation->set_rules('nama','Nama','required');
+        // $validation->set_rules('qty','Quantitiy per Unit','required');
+        // $validation->set_rules('price','Harga','required|numeric');
+
 		
 
 		$this->load->view('page/movie_add', $data);
+	}
+
+	public function InsertMovie(){
+		$post = $this->input->post();
+		$this->Title = $post['title'];
+		$this->Year = $post['year'];
+		$this->Director = $post['dir'];
+		$this->PosterLink = $this->UploadImage();
+
+	}
+
+	public function UploadImage(){
+		$config['upload_path']          = './assets/poster/';
+		$config['allowed_types']        = 'jpg|png';
+		// $config['max_size']             = 100;
+		// $config['max_width']            = 1024;
+		// $config['max_height']           = 768;
+		
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('poster')){
+			$error = array('error' => $this->upload->display_errors());
+		}else{
+			$data_poster = array('upload_data' => $this->upload->data());
+			$dir = "../../assets/poster/".$data_poster['upload_data']['file_name'];
+			return $dir;
+		}
+
 	}
 
 	public function EditMovie($param)
