@@ -7,6 +7,8 @@ class MoviePage extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('movies');
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
 	}
 
 	public function index()
@@ -45,11 +47,7 @@ class MoviePage extends CI_Controller {
 		$data['navbar'] = $this->load->view('template/navbar_movie',NULL,TRUE);
 		$data['footer'] = $this->load->view('template/footer_movie',NULL,TRUE);
 
-		// $validation = $this->form_validation;
-
-        // $validation->set_rules('nama','Nama','required');
-        // $validation->set_rules('qty','Quantitiy per Unit','required');
-        // $validation->set_rules('price','Harga','required|numeric');
+		// 
 
 		
 
@@ -63,8 +61,48 @@ class MoviePage extends CI_Controller {
 		$this->Director = $post['dir'];
 		$this->PosterLink = $this->UploadImage();
 
-		$this->movies->AddData($this->Title, $this->Year, $this->Director, $this->PosterLink);
-        redirect('MoviePage/index');
+		$config = array(
+			array(
+					'field' => 'title',
+					'label' => 'Title',
+					'rules' => 'required',
+					'errors' => array(
+						'required' => 'You must provide a string',
+					),
+			),
+			array(
+					'field' => 'year',
+					'label' => 'Year',
+					'rules' => array(
+						'required',
+						'numeric',
+						'min_length[4]',
+						'max_length[5]',
+					),
+					'errors' => array(
+							'required' => 'You must provide a string',
+							'numeric' => 'You should input a number not string',
+					),
+			),
+			array(
+					'field' => 'dir',
+					'label' => 'Director',
+					'rules' => 'required',
+					'errors' => array(
+						'required' => 'You must provide a string',
+					),
+			)
+	);
+
+	$this->form_validation->set_rules($config);
+
+		if ($this->form_validation->run() == FALSE){
+            redirect(site_url('MoviePage/AddMovie'));
+        } else {               
+            $this->movies->AddData($this->Title, $this->Year, $this->Director, $this->PosterLink);
+        	redirect('MoviePage/index');
+        }
+		
 	}
 
 	public function UploadImage(){
