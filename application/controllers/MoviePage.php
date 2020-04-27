@@ -40,7 +40,18 @@ class MoviePage extends CI_Controller {
 
 	public function AddMovie()
 	{
-		//Type your code here ...
+		$post = $this->input->post();
+		$this->Title = $post['title'];
+		$this->Year = $post['year'];
+		$this->Director = $post['director'];
+
+		$config['upload_path']          = './assets/poster/';
+		$config['allowed_types']        = 'jpg|png';
+		$config['max_size']             = 100;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+ 
+		$this->load->library('upload', $config);
 	}
 
 	public function EditMovie($param)
