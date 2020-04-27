@@ -28,7 +28,7 @@
 								echo "<span class='glyphicon glyphicon-search'></span>";
 							echo "</button>";
 						echo "</a>";
-						echo "<a href='".base_url("index.php/MoviePage/EditMovie/$id")."'
+						echo "<a href='".base_url("index.php/MoviePage/EditMovie?id=$id")."'
 								style='margin-right:10px;color:rgb(255,215,0);'>";
 							echo "<button class='btn'>";
 								echo "<span class='glyphicon glyphicon-edit'></span>";

@@ -47,7 +47,17 @@
 
 		public function UpdateData($id,$title,$year,$director,$posterLink)
 		{
-			//Type your code here ...
+			$where = array(
+				'MovieId'		=> $id
+			);
+			$values =array(
+				'Title'			=> $title,
+				'Year'			=> $year,
+				'Director'		=> $director,
+				'PosterLink'	=> $posterLink
+			);
+			$this->db->where($where);
+			$this->db->update('tblmovie',$values);  
 		}
 	}
 

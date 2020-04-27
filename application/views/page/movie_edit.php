@@ -19,11 +19,31 @@
 	</div>
 	<div class="container" style="margin-top: 35px;">
 		<?php 
-			if(isset(/* Something is missing ...*/)){ 
-				foreach(/* Something is missing ...*/){
-					echo form_open_multipart(/* Something is missing ...*/);
+			if(isset($_GET['id'])){ 
+				foreach($data as $row){
+					echo form_open_multipart('MoviePage/MovieEdit');
 		?>
-			<!-- Type your code here ... -->
+			<div class='form-group row'>
+                    <label class='col-sm-3'>Movie ID</label>
+                    <div class='col-sm-6'><input class='form-control' type='text' name="id" value="<?php echo $row['MovieID']; ?>" readonly></div>
+			</div>
+			<div class='form-group row'>
+                    <label class='col-sm-3'>Title</label>
+                    <div class='col-sm-6'><input class='form-control' type='text' name="title" value="<?php echo $row['Title']; ?>"></div>
+			</div>
+			<div class='form-group row'>
+                    <label class='col-sm-3'>Year</label>
+                    <div class='col-sm-3'><input class='form-control' type='text' name="year" value="<?php echo $row['Year']; ?>"></div>
+			</div>
+			<div class='form-group row'>
+                    <label class='col-sm-3'>Director</label>
+                    <div class='col-sm-6'><input class='form-control' type='text' name="dir" value="<?php echo $row['Director']; ?>"></div>
+			</div>
+			<div class='form-group row'>
+                    <label class='col-sm-3'>Poster</label>
+                    <div class='col-sm-6'><input class='form-control' type='file' name="poster"></div>
+			</div>
+			<input type="submit" class="btn btn-primary"/>
 		<?php }} ?>
 		<?php echo form_close(); ?>
 	</div>

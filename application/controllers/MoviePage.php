@@ -86,9 +86,30 @@ class MoviePage extends CI_Controller {
 
 	}
 
-	public function EditMovie($param)
+	public function EditMovie()
 	{
-		//Type your code here ...
+		$data['style'] = $this->load->view('include/style',NULL,TRUE);
+		$data['script'] = $this->load->view('include/script',NULL,TRUE);
+		$data['navbar'] = $this->load->view('template/navbar_movie',NULL,TRUE);
+		$data['footer'] = $this->load->view('template/footer_movie',NULL,TRUE);
+		$data['id'] = $this->input->get('id');
+
+		$data['data'] = $this->movies->ShowDetail($data['id']);
+
+		$this->load->view('page/movie_edit', $data);
+	}
+
+	public function MovieEdit(){
+
+		$post = $this->input->post();
+		$this->MovieID = $post['id'];
+		$this->Title = $post['title'];
+		$this->Year = $post['year'];
+		$this->Director = $post['dir'];
+		$this->PosterLink = $this->UploadImage();
+
+		$this->movies->UpdateData($this->MovieID, $this->Title, $this->Year, $this->Director, $this->PosterLink);
+		redirect('MoviePage/index');
 	}
 }
 ?>
