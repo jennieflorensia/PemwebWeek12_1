@@ -18,8 +18,23 @@
 			</div>
 	</div>
 	<div class="container" style="margin-top: 35px;">
-		<?php echo form_open_multipart(/* Something is missing ...*/); ?>
-			<!-- Type your code here ... -->
+		<?php echo form_open_multipart('MoviesPage/Movies_Add'); ?>
+			<div class='form-group row'>
+                    <label class='col-sm-3'>Title</label>
+                    <div class='col-sm-6'><input class='form-control' type='text' name="title"></div>
+			</div>
+			<div class='form-group row'>
+                    <label class='col-sm-3'>Year</label>
+                    <div class='col-sm-3'><input class='form-control' type='text' name="year"></div>
+			</div>
+			<div class='form-group row'>
+                    <label class='col-sm-3'>Director</label>
+                    <div class='col-sm-6'><input class='form-control' type='text' name="dir"></div>
+			</div>
+			<div class='form-group row'>
+                    <label class='col-sm-3'>Director</label>
+                    <div class='col-sm-6'><input class='form-control' type='text' name="dir"></div>
+            </div>
 		<?php echo form_close(); ?>
 	</div>
 	<?php echo $footer; ?>
