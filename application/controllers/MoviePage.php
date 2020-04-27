@@ -31,11 +31,11 @@ class MoviePage extends CI_Controller {
 		$data['script'] = $this->load->view('include/script',NULL,TRUE);
 		$data['navbar'] = $this->load->view('template/navbar_movie',NULL,TRUE);
 		$data['footer'] = $this->load->view('template/footer_movie',NULL,TRUE);
-		$movies['id'] = $this->input->get('id');
+		$data['id'] = $this->input->get('id');
 
-		$movies['data'] = $this->movies->ShowDetail($movies['id']);
+		$data['data'] = $this->movies->ShowDetail($data['id']);
 
-		$this->load->view('page/movie_details', $data, $movies);
+		$this->load->view('page/movie_details', $data);
 	}
 
 	public function AddMovie()

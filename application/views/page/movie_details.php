@@ -15,7 +15,7 @@
 	<div class="container-fluid">
 			<div style="border-bottom: 1px solid black;">
 				<p style="text-align: center;"> 
-					<font size="7" color="black"> <?php //Something is missing ... ?> </font>
+					<font size="7" color="black"> <?php echo $row['Title']; ?> </font>
 					<font size="5" color="rgb(127,127,127)"> Movie Details </font> 
 					<a href="<?php echo base_url('index.php/MoviePage'); ?>" style="float:right;margin-right: 15px;margin-top: 35px;">
 						<button class="btn btn-primary"> 
