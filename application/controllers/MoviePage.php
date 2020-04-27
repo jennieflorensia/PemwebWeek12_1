@@ -63,6 +63,8 @@ class MoviePage extends CI_Controller {
 		$this->Director = $post['dir'];
 		$this->PosterLink = $this->UploadImage();
 
+		$this->movies->AddData($this->Title, $this->Year, $this->Director, $this->PosterLink);
+        redirect('MoviePage/index');
 	}
 
 	public function UploadImage(){

@@ -18,7 +18,7 @@
 			</div>
 	</div>
 	<div class="container" style="margin-top: 35px;">
-		<?php echo form_open_multipart('MoviesPage/Movies_Add'); ?>
+		<?php echo form_open_multipart('MoviePage/InsertMovie'); ?>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Title</label>
                     <div class='col-sm-6'><input class='form-control' type='text' name="title"></div>
