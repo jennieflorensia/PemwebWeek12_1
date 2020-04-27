@@ -32,9 +32,10 @@
                     <div class='col-sm-6'><input class='form-control' type='text' name="dir"></div>
 			</div>
 			<div class='form-group row'>
-                    <label class='col-sm-3'>Director</label>
-                    <div class='col-sm-6'><input class='form-control' type='text' name="dir"></div>
-            </div>
+                    <label class='col-sm-3'>Poster</label>
+                    <div class='col-sm-6'><input class='form-control' type='file' name="poster"></div>
+			</div>
+			<input type="submit" class="btn btn-primary"/>
 		<?php echo form_close(); ?>
 	</div>
 	<?php echo $footer; ?>

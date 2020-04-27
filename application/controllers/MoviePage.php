@@ -40,6 +40,11 @@ class MoviePage extends CI_Controller {
 
 	public function AddMovie()
 	{
+		$data['style'] = $this->load->view('include/style',NULL,TRUE);
+		$data['script'] = $this->load->view('include/script',NULL,TRUE);
+		$data['navbar'] = $this->load->view('template/navbar_movie',NULL,TRUE);
+		$data['footer'] = $this->load->view('template/footer_movie',NULL,TRUE);
+
 		$post = $this->input->post();
 		$this->Title = $post['title'];
 		$this->Year = $post['year'];
@@ -52,10 +57,7 @@ class MoviePage extends CI_Controller {
 		$config['max_height']           = 768;
  
 		$this->load->library('upload', $config);
-		$data['style'] = $this->load->view('include/style',NULL,TRUE);
-		$data['script'] = $this->load->view('include/script',NULL,TRUE);
-		$data['navbar'] = $this->load->view('template/navbar_movie',NULL,TRUE);
-		$data['footer'] = $this->load->view('template/footer_movie',NULL,TRUE);
+		
 
 		$this->load->view('page/movie_add', $data);
 	}
