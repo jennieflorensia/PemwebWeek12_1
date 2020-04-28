@@ -47,10 +47,6 @@ class MoviePage extends CI_Controller {
 		$data['navbar'] = $this->load->view('template/navbar_movie',NULL,TRUE);
 		$data['footer'] = $this->load->view('template/footer_movie',NULL,TRUE);
 
-		// 
-
-		
-
 		$this->load->view('page/movie_add', $data);
 	}
 
@@ -87,17 +83,29 @@ class MoviePage extends CI_Controller {
 			array(
 					'field' => 'dir',
 					'label' => 'Director',
-					'rules' => 'required',
+					'rules' => array(
+						'required',
+						'max_length[30]',
+					),
 					'errors' => array(
 						'required' => 'You must provide a string',
 					),
+				),
+			array(
+					'field' => 'poster',
+					'label' => 'PosterLink',
+					'rules' => 'callback_poster_check'
 			)
 	);
+
+	// $this->form_validation->set_rules('title', 'Title', 'required');
+	// $this->form_validation->set_rules('year', 'Year', 'required|numeric|min_length[4]|max_length[5]');
+	// $this->form_validation->set_rules('dir', 'Director', 'required|max_length[30]');
 
 	$this->form_validation->set_rules($config);
 
 		if ($this->form_validation->run() == FALSE){
-            redirect(site_url('MoviePage/AddMovie'));
+            $this->AddMovie();
         } else {               
             $this->movies->AddData($this->Title, $this->Year, $this->Director, $this->PosterLink);
         	redirect('MoviePage/index');
@@ -105,12 +113,34 @@ class MoviePage extends CI_Controller {
 		
 	}
 
+	public function poster_check($str){
+		$allowedType = array('image/jpeg', 'image/png', 'image/pjpeg', 'image/x-png');
+		$mime = get_mime_by_extension($_FILES['poster']['name']);
+		if(isset($_FILES['poster']['name']) && $_FILES['poster']['name']!=""){
+			if(in_array($mime, $allowedType)){
+				if($_FILES['poster']['size'] < 1048576){
+		  	 		return true;
+		  		}
+		  		else{
+		   			$this->form_validation->set_message('poster_check', 'The uploaded file exceeds the maximum allowed size in your PHP configuration file !');
+					return false;
+		  		}
+		 	}
+			 else{
+				$this->form_validation->set_message('poster_check', 'The filetype you are attempting to upload is not allowed !');
+				return false;
+			}
+		}
+		else{
+			$this->form_validation->set_message('poster_check', 'Please choose a file to upload !');
+			return false;
+		}
+	}
+
 	public function UploadImage(){
 		$config['upload_path']          = './assets/poster/';
 		$config['allowed_types']        = 'jpg|png';
-		// $config['max_size']             = 100;
-		// $config['max_width']            = 1024;
-		// $config['max_height']           = 768;
+		$config['max_size']				= 1024;
 		
 		$this->load->library('upload', $config);
 

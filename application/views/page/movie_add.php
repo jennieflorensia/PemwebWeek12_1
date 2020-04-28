@@ -24,22 +24,32 @@
 		<?php echo form_open_multipart('MoviePage/InsertMovie'); ?>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Title</label>
-					<div class='col-sm-6'><input class='form-control' type='text' name="title"></div>
-					<?php echo form_error('title'); ?>
+					<div class='col-sm-6'>
+						<input class='form-control' type='text' name="title">
+						<?php echo form_error('title'); ?>
+					</div>
+					
 			</div>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Year</label>
-					<div class='col-sm-3'><input class='form-control' type='text' name="year"></div>
-					<?php echo form_error('year'); ?>
+					<div class='col-sm-3'>
+						<input class='form-control' type='text' name="year">
+						<?php echo form_error('year'); ?>
+					</div>
 			</div>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Director</label>
-					<div class='col-sm-6'><input class='form-control' type='text' name="dir"></div>
-					<?php echo form_error('dir'); ?>
+					<div class='col-sm-6'>
+						<input class='form-control' type='text' name="dir">
+						<?php echo form_error('dir'); ?>
+					</div>
 			</div>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Poster</label>
-                    <div class='col-sm-6'><input class='form-control' type='file' name="poster"></div>
+                    <div class='col-sm-6'>
+						<input class='form-control' type='file' name="poster">
+						<?php echo form_error('poster'); ?>
+					</div>
 			</div>
 			<input type="submit" class="btn btn-primary"/>
 		<?php echo form_close(); ?>
