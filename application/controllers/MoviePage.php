@@ -77,7 +77,7 @@ class MoviePage extends CI_Controller {
 						'max_length[5]',
 					),
 					'errors' => array(
-							'required' => 'You must provide a string',
+							'required' => 'You must provide a number',
 							'numeric' => 'You should input a number not string',
 					),
 			),
@@ -99,9 +99,6 @@ class MoviePage extends CI_Controller {
 			)
 	);
 
-	// $this->form_validation->set_rules('title', 'Title', 'required');
-	// $this->form_validation->set_rules('year', 'Year', 'required|numeric|min_length[4]|max_length[5]');
-	// $this->form_validation->set_rules('dir', 'Director', 'required|max_length[30]');
 
 	$this->form_validation->set_rules($config);
 	$this->form_validation->set_error_delimiters('<div style="color:red;">', '</div>');
