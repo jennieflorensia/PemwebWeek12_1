@@ -104,6 +104,7 @@ class MoviePage extends CI_Controller {
 	// $this->form_validation->set_rules('dir', 'Director', 'required|max_length[30]');
 
 	$this->form_validation->set_rules($config);
+	$this->form_validation->set_error_delimiters('<div style="color:red;">', '</div>');
 
 		if ($this->form_validation->run() == FALSE){
             $this->AddMovie();
@@ -220,6 +221,7 @@ class MoviePage extends CI_Controller {
 		);
 
 		$this->form_validation->set_rules($config);
+		$this->form_validation->set_error_delimiters('<div style="color:red;">', '</div>');
 
 		if ($this->form_validation->run() == FALSE){
 			$this->EditMovie();
