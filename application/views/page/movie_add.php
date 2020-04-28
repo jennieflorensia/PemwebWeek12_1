@@ -31,7 +31,7 @@
 			</div>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Year</label>
-					<div class='col-sm-3'>
+					<div class='col-sm-2'>
 						<input class='form-control' type='text' name="year">
 						<?php echo form_error('year'); ?>
 					</div>
