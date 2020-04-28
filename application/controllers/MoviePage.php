@@ -7,7 +7,7 @@ class MoviePage extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('movies');
-		$this->load->helper(array('form', 'url'));
+		$this->load->helper(array('form', 'url', 'file'));
 		$this->load->library('form_validation');
 	}
 
@@ -23,7 +23,8 @@ class MoviePage extends CI_Controller {
 
 		$data['table'] = $this->load->view('template/table_movie', $movies, TRUE);
 
-		$this->load->view('page/movie',$data);
+		$this->load->view('page/movie',$data, array('error' => '' ));
+		
 	}
 
 	public function ShowDetail()
@@ -94,7 +95,7 @@ class MoviePage extends CI_Controller {
 			array(
 					'field' => 'poster',
 					'label' => 'PosterLink',
-					'rules' => 'callback_poster_check'
+					'rules' => 'callback_poster_check',
 			)
 	);
 
@@ -146,6 +147,7 @@ class MoviePage extends CI_Controller {
 
 		if ( ! $this->upload->do_upload('poster')){
 			$error = array('error' => $this->upload->display_errors());
+			// $this->load->view
 		}else{
 			$data_poster = array('upload_data' => $this->upload->data());
 			$dir = "../../assets/poster/".$data_poster['upload_data']['file_name'];
@@ -176,8 +178,55 @@ class MoviePage extends CI_Controller {
 		$this->Director = $post['dir'];
 		$this->PosterLink = $this->UploadImage();
 
-		$this->movies->UpdateData($this->MovieID, $this->Title, $this->Year, $this->Director, $this->PosterLink);
-		redirect('MoviePage/index');
+		$config = array(
+			array(
+					'field' => 'title',
+					'label' => 'Title',
+					'rules' => 'required',
+					'errors' => array(
+						'required' => 'You must provide a string',
+					),
+			),
+			array(
+					'field' => 'year',
+					'label' => 'Year',
+					'rules' => array(
+						'required',
+						'numeric',
+						'min_length[4]',
+						'max_length[5]',
+					),
+					'errors' => array(
+							'required' => 'You must provide a string',
+							'numeric' => 'You should input a number not string',
+					),
+			),
+			array(
+					'field' => 'dir',
+					'label' => 'Director',
+					'rules' => array(
+						'required',
+						'max_length[30]',
+					),
+					'errors' => array(
+						'required' => 'You must provide a string',
+					),
+				),
+			array(
+					'field' => 'poster',
+					'label' => 'PosterLink',
+					'rules' => 'callback_poster_check',
+			)
+		);
+
+		$this->form_validation->set_rules($config);
+
+		if ($this->form_validation->run() == FALSE){
+			$this->EditMovie();
+		} else {               
+			$this->movies->UpdateData($this->MovieID, $this->Title, $this->Year, $this->Director, $this->PosterLink);
+			redirect('MoviePage/index');
+		}
 	}
 }
 ?>

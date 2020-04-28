@@ -28,7 +28,6 @@
 						<input class='form-control' type='text' name="title">
 						<?php echo form_error('title'); ?>
 					</div>
-					
 			</div>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Year</label>

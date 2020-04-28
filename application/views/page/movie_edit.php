@@ -25,23 +25,37 @@
 		?>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Movie ID</label>
-                    <div class='col-sm-6'><input class='form-control' type='text' name="id" value="<?php echo $row['MovieID']; ?>" readonly></div>
+                    <div class='col-sm-6'>
+						<input class='form-control' type='text' name="id" value="<?php echo $row['MovieID']; ?>" readonly>
+					</div>
 			</div>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Title</label>
-                    <div class='col-sm-6'><input class='form-control' type='text' name="title" value="<?php echo $row['Title']; ?>"></div>
+                    <div class='col-sm-6'>
+						<input class='form-control' type='text' name="title" value="<?php echo $row['Title']; ?>">
+						<?php echo form_error('title'); ?>
+					</div>
 			</div>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Year</label>
-                    <div class='col-sm-3'><input class='form-control' type='text' name="year" value="<?php echo $row['Year']; ?>"></div>
+                    <div class='col-sm-3'>
+						<input class='form-control' type='text' name="year" value="<?php echo $row['Year']; ?>">
+						<?php echo form_error('year'); ?>
+					</div>
 			</div>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Director</label>
-                    <div class='col-sm-6'><input class='form-control' type='text' name="dir" value="<?php echo $row['Director']; ?>"></div>
+                    <div class='col-sm-6'>
+						<input class='form-control' type='text' name="dir" value="<?php echo $row['Director']; ?>">
+						<?php echo form_error('dir'); ?>
+					</div>
 			</div>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Poster</label>
-                    <div class='col-sm-6'><input class='form-control' type='file' name="poster"></div>
+                    <div class='col-sm-6'>
+						<input class='form-control' type='file' name="poster">
+						<?php echo form_error('poster'); ?>
+					</div>
 			</div>
 			<input type="submit" class="btn btn-primary"/>
 		<?php }} ?>
