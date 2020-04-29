@@ -23,7 +23,7 @@ class MoviePage extends CI_Controller {
 
 		$data['table'] = $this->load->view('template/table_movie', $movies, TRUE);
 
-		$this->load->view('page/movie',$data, array('error' => '' ));
+		$this->load->view('page/movie',$data);
 		
 	}
 
@@ -57,6 +57,9 @@ class MoviePage extends CI_Controller {
 		$this->Year = $post['year'];
 		$this->Director = $post['dir'];
 		$this->PosterLink = $this->UploadImage();
+		if($this->PosterLink==''){
+			$this->PosterLink = 'default.png';
+		}
 
 		$config = array(
 			array(
@@ -130,10 +133,7 @@ class MoviePage extends CI_Controller {
 				return false;
 			}
 		}
-		else{
-			$this->form_validation->set_message('poster_check', 'Please choose a file to upload !');
-			return false;
-		}
+		return true;
 	}
 
 	public function UploadImage(){
@@ -154,15 +154,21 @@ class MoviePage extends CI_Controller {
 
 	}
 
-	public function EditMovie()
+	public function EditMovie($param=FALSE)
 	{
 		$data['style'] = $this->load->view('include/style',NULL,TRUE);
 		$data['script'] = $this->load->view('include/script',NULL,TRUE);
 		$data['navbar'] = $this->load->view('template/navbar_movie',NULL,TRUE);
 		$data['footer'] = $this->load->view('template/footer_movie',NULL,TRUE);
-		$data['id'] = $this->input->get('id');
+		if($param==FALSE){
+			$data['id'] = $this->input->get('id');
+		}else{
+			$data['id'] = $param;
+			// echo var_dump($data['id']);die;
+		}
 
 		$data['data'] = $this->movies->ShowDetail($data['id']);
+		// echo var_dump($data['data']);die;
 
 		$this->load->view('page/movie_edit', $data);
 	}
@@ -220,12 +226,18 @@ class MoviePage extends CI_Controller {
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('<div style="color:red;">', '</div>');
 
-		if ($this->form_validation->run() == FALSE){
-			$this->EditMovie();
-		} else {               
+		
+
+		if ($this->form_validation->run()){
 			$this->movies->UpdateData($this->MovieID, $this->Title, $this->Year, $this->Director, $this->PosterLink);
 			redirect('MoviePage/index');
+		} else {               
+			// echo var_dump($this->MovieID);die;
+			$this->EditMovie($this->MovieID);
 		}
+		// $this->movies->UpdateData($this->MovieID, $this->Title, $this->Year, $this->Director, $this->PosterLink);
+		// redirect('MoviePage/index');
+		
 	}
 }
 ?>

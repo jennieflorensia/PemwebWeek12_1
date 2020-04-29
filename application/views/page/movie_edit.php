@@ -19,9 +19,8 @@
 	</div>
 	<div class="container" style="margin-top: 35px;">
 		<?php 
-			if(isset($_GET['id'])){ 
-				foreach($data as $row){
-					echo form_open_multipart('MoviePage/MovieEdit');
+			foreach($data as $row){
+				echo form_open_multipart('MoviePage/MovieEdit');
 		?>
 			<div class='form-group row'>
                     <label class='col-sm-3'>Movie ID</label>
@@ -58,7 +57,7 @@
 					</div>
 			</div>
 			<input type="submit" class="btn btn-primary"/>
-		<?php }} ?>
+		<?php }?>
 		<?php echo form_close(); ?>
 	</div>
 	<?php echo $footer; ?>
